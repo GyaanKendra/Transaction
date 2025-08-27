@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>स्वागत है | Test Series Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #e6f7ff, #ffffff);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #0077b6;
+      margin-bottom: 20px;
+    }
+
+    .loader {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .loader img {
+      width: 220px; /* 🔼 बड़ा किया गया */
+      margin-bottom: 10px;
+    }
+
+    .pending-payment-box {
+      background: linear-gradient(to right, #ffe5ec, #f8d7da);
+      color: #b00020;
+      border-left: 6px solid #ff4d6d;
+      padding: 20px;
+      font-size: 18px;
+      border-radius: 10px;
+      margin: 30px 0;
+      font-weight: bold;
+      text-align: center;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    .step-tracker {
+      margin: 30px 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .step {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border-bottom: 4px solid #ccc;
+      position: relative;
+    }
+
+    .step.active {
+      border-color: #00b4d8;
+      font-weight: bold;
+      color: #0077b6;
+    }
+
+    .step::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 10px;
+      height: 30px;
+      border-right: 2px dashed #ccc;
+    }
+
+    .step:last-child::after {
+      display: none;
+    }
+
+    .info p {
+      font-size: 17px;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #d00000;
+    }
+
+    .faq-section {
+      margin-top: 40px;
+    }
+
+    .faq-question {
+      background: #e3f2fd;
+      padding: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      border: 1px solid #bde0fe;
+      margin-bottom: 5px;
+      border-radius: 6px;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 15px;
+      background: #f0f9ff;
+      border-left: 3px solid #0077b6;
+      margin-bottom: 10px;
+      font-size: 15px;
+      animation: fadeIn 0.3s;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      background: #e0f7fa;
+      padding: 20px;
+      margin-top: 50px;
+      font-size: 16px;
+      color: #444;
+    }
+
+    footer a {
+      color: #0077b6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lang-toggle {
+      text-align: right;
+      font-size: 14px;
+    }
+
+    .lang-toggle select {
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    /* New Test Series Navigation Styles */
+    .test-series-nav {
+      margin: 40px 0 20px;
+      text-align: center;
+    }
+    
+    .test-series-nav h2 {
+      color: #0077b6;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+    
+    .series-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .series-button {
+      background: linear-gradient(to right, #0077b6, #00b4d8);
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      width: 180px;
+      text-align: center;
+    }
+    
+    .series-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    
+    .series-button i {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    
+    .series-button span {
+      font-size: 16px;
+      line-height: 1.3;
+    }
+    
+    .premium {
+      background: linear-gradient(135deg, #ff9a00, #ff6a00);
+    }
+    
+    .rajasthan {
+      background: linear-gradient(135deg, #d63384, #a61e4d);
+    }
+    
+    .grade-4 {
+      background: linear-gradient(135deg, #20c997, #099268);
+    }
+    
+    .grade-2 {
+      background: linear-gradient(135deg, #6f42c1, #4a1e9e);
+    }
+    
+    .science {
+      background: linear-gradient(135deg, #3b5bdb, #2248c2);
+    }
+    
+    .maths {
+      background: linear-gradient(135deg, #e03131, #c22525);
+    }
+    
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      animation: modalFadeIn 0.3s;
+    }
+    
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .modal-icon {
+      font-size: 50px;
+      color: #ff9a00;
+      margin-bottom: 15px;
+    }
+    
+    .modal h3 {
+      color: #0077b6;
+      margin-bottom: 15px;
+    }
+    
+    .modal p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .modal-close {
+      background: #0077b6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    
+    .modal-close:hover {
+      background: #005a8c;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .series-buttons {
+        gap: 12px;
+      }
+      
+      .series-button {
+        width: 150px;
+        padding: 12px 15px;
+      }
+      
+      .series-button i {
+        font-size: 28px;
+      }
+      
+      .series-button span {
+        font-size: 14px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .series-buttons {
+        gap: 10px;
+      }
+      
+      .series-button {
+        width: 130px;
+        padding: 10px 12px;
+      }
+      
+      .series-button i {
+        font-size: 24px;
+      }
+      
+      .series-button span {
+        font-size: 12px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="lang-toggle">
+      भाषा चुनें: 
+      <select>
+        <option selected>हिन्दी</option>
+        <option>English</option>
+      </select>
+    </div>
+
+    <h1>🙏 हमारे वेबसाइट पर आपका स्वागत है</h1>
+    <div style="text-align:center;">
+  <img src="https://cdn-icons-png.flaticon.com/512/845/845646.png" alt="Success" width="100">
+  <h2 style="color:green;">फॉर्म सफलतापूर्वक सबमिट हो गया है!</h2>
+</div>
+
+    <div class="loader">
+      <img src="https://i.gifer.com/YCZH.gif" alt="Processing...">
+      <p>आपकी पेमेंट वेरिफाई की जा रही है, कृपया कुछ समय प्रतीक्षा करें...</p>
+    </div>
+
+    <!-- 🔔 Creative Pending Payment Alert -->
+    <div class="pending-payment-box">
+      🔄 पेमेंट प्राप्त प्रक्रिया अभी लंबित है — कृपया धैर्य रखें, हम आपकी जानकारी वेरिफाई कर रहे हैं...
+    </div>
+
+    <div class="step-tracker">
+      <div class="step active">फॉर्म सबमिट</div>
+      <div class="step">पेमेंट प्राप्त</div>
+      <div class="step">सर्वर वेरिफिकेशन</div>
+      <div class="step">ID & पासवर्ड मेल</div>
+    </div>
+
+    <div class="info">
+      <p>आपका फॉर्म सफलतापूर्वक सबमिट हो चुका है। जब तक आपकी <span class="highlight">पेमेंट वेरिफाई</span> नहीं हो जाती, तब तक टेस्ट एक्सेस उपलब्ध नहीं रहेगा।</p>
+      <p>यह प्रक्रिया सामान्यतः <span class="highlight">1 से 1.30 घंटे</span> का समय लेती है। कृपया धैर्य रखें।</p>
+      <p>पेमेंट वेरिफिकेशन के बाद आपको <span class="highlight">यूनिक ID और पासवर्ड</span> आपके ईमेल पर भेज दिया जाएगा।</p>
+    </div>
+    <div style="background:#fff3cd; padding: 20px; margin-top: 30px; border-left: 5px solid #ffc107;">
+  <strong>📩 नोट:</strong> कृपया <b>Inbox</b>, <b>Spam</b> और <b>Promotions</b> फोल्डर चेक करें।  
+  ID और पासवर्ड वहीं भेजा जाएगा。
+</div>
+
+    <!-- New Test Series Navigation Section -->
+    <div class="test-series-nav">
+      <h2>🚀 हमारे लोकप्रिय टेस्ट सीरीज़ एक्सप्लोर करें</h2>
+      <div class="series-buttons">
+        <button class="series-button premium" onclick="showSeriesModal('प्रीमियम वीडियो टेस्ट सीरीज़')">
+          <i class="fas fa-crown"></i>
+          <span>प्रीमियम वीडियो टेस्ट सीरीज़</span>
+        </button>
+        
+        <button class="series-button rajasthan" onclick="showSeriesModal('राजस्थान विशेष टेस्ट सीरीज़')">
+          <i class="fas fa-fort-awesome"></i>
+          <span>राजस्थान विशेष टेस्ट सीरीज़</span>
+        </button>
+        
+        <button class="series-button grade-4" onclick="showSeriesModal('4th Grade टेस्ट सीरीज़')">
+          <i class="fas fa-graduation-cap"></i>
+          <span>4th Grade टेस्ट सीरीज़</span>
+        </button>
+        
+        <button class="series-button grade-2" onclick="showSeriesModal('2nd Grade टेस्ट सीरीज़')">
+          <i class="fas fa-graduation-cap"></i>
+          <span>2nd Grade टेस्ट सीरीज़</span>
+        </button>
+        
+        <button class="series-button rajasthan" 
+        onclick="window.location.href='VDOTESTSERIES.html'">
+  <i class="fas fa-fort-awesome"></i>
+  <span>Village Development Officer टेस्ट सीरीज़</span>
+</button>
+        
+        <button class="series-button maths" onclick="showSeriesModal('गणित मास्टरी टेस्ट सीरीज़')">
+          <i class="fas fa-square-root-alt"></i>
+          <span>गणित मास्टरी टेस्ट सीरीज़</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="faq-section">
+      <h2>❓ अक्सर पूछे जाने वाले प्रश्न (FAQ)</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">पेमेंट के बाद तुरंत टेस्ट क्यों नहीं मिलता?</div>
+        <div class="faq-answer">हमारी वेरिफिकेशन प्रक्रिया सुरक्षा के लिए जरूरी है, जिससे सभी यूज़र्स को सही एक्सेस मिले।</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">ID और पासवर्ड कितनी देर में आएगा?</div>
+        <div class="faq-answer">आमतौर पर 1 से 1.30 घंटे में मेल भेज दी जाती है।</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">अगर ईमेल नहीं मिला तो क्या करें?</div>
+        <div class="faq-answer">स्पैम या प्रमोशन फ़ोल्डर चेक करें। फिर भी ना मिले तो हमें ईमेल करें: abc@gmail.com</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">क्या मुझे फॉर्म दोबारा भरना होगा?</div>
+        <div class="faq-answer">नहीं, एक बार भरने के बाद पुनः भरना आवश्यक नहीं है।</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">क्या यह ID सभी मॉक टेस्ट के लिए मान्य होगी?</div>
+        <div class="faq-answer">हां, सभी टेस्ट तक एक्सेस मिलेगा जो आपके पैकेज में हैं।</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">वेरिफिकेशन में देरी हो रही है, क्या करें?</div>
+        <div class="faq-answer">कभी-कभी बैंक नेटवर्क में देरी हो सकती है। कृपया 2 घंटे तक प्रतीक्षा करें या सपोर्ट से संपर्क करें।</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">क्या पेमेंट दोबारा करना पड़ेगा अगर पहले की पुष्टि नहीं हुई?</div>
+        <div class="faq-answer">नहीं, अगर राशि कट गई है तो पुष्टि हो जाएगी। कृपया स्क्रीनशॉट के साथ हमें ईमेल करें।</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    📧 सपोर्ट ईमेल: <a href="mailto:abc@gmail.com">abc@gmail.com</a> | सभी अधिकार सुरक्षित © 2025
+  </footer>
+
+  <!-- Modal for Series Information -->
+  <div class="modal" id="seriesModal">
+    <div class="modal-content">
+      <div class="modal-icon">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h3 id="modalTitle">टेस्ट सीरीज़ एक्सेस</h3>
+      <p id="modalMessage">आपकी पेमेंट वेरिफिकेशन प्रक्रिया अभी चल रही है। एक बार पेमेंट वेरिफाई होने के बाद, आपको लॉगिन ID और पासवर्ड ईमेल किया जाएगा, जिससे आप इस टेस्ट सीरीज़ तक पहुंच सकेंगे।</p>
+      <button class="modal-close" onclick="closeModal()">ठीक है</button>
+    </div>
+  </div>
+
+  <script>
+    const faqs = document.querySelectorAll('.faq-question');
+    faqs.forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+    
+    // Function to show series modal
+    function showSeriesModal(seriesName) {
+      const modal = document.getElementById('seriesModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalMessage = document.getElementById('modalMessage');
+      
+      modalTitle.textContent = seriesName;
+      modalMessage.innerHTML = `आपकी पेमेंट वेरिफिकेशन प्रक्रिया अभी चल रही है। एक बार पेमेंट वेरिफाई होने के बाद, आपको लॉगिन ID और पासवर्ड ईमेल किया जाएगा, जिससे आप <strong>${seriesName}</strong> तक पहुंच सकेंगे।`;
+      
+      modal.style.display = 'flex';
+    }
+    
+    // Function to close modal
+    function closeModal() {
+      const modal = document.getElementById('seriesModal');
+      modal.style.display = 'none';
+    }
+    
+    // Close modal when clicking outside the content
+    window.onclick = function(event) {
+      const modal = document.getElementById('seriesModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
+
+</body>
+</html>
